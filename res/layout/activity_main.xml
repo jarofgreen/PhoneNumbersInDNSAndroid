@@ -24,6 +24,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="go"
         android:text="@string/go_button" />
 
 </LinearLayout>
