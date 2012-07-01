@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 
 
@@ -21,7 +22,7 @@ public class ResultsActivity extends Activity {
 
 	String url;
 	List<Result> results;
-	
+    ProgressDialog loadingDialog;	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,11 @@ public class ResultsActivity extends Activity {
         url = extras.getString("url");
         
         setTitle("Results for "+url);
+        
+        loadingDialog = new ProgressDialog(this);
+        loadingDialog.setMessage("Loading ...");
+        loadingDialog.setCancelable(false);
+        loadingDialog.show();   
         
         new ResultsActivityWorker().execute(url);
         
@@ -58,7 +64,8 @@ public class ResultsActivity extends Activity {
 		}
 		
 		
-        protected void onPostExecute(Boolean taskResult) {   	
+        protected void onPostExecute(Boolean taskResult) {   
+            loadingDialog.dismiss();  
         	if (taskResult) {
         		
         		LinearLayout parent = (LinearLayout)findViewById(R.id.results_container);
