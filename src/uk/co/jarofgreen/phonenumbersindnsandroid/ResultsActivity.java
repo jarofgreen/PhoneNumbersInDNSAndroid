@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.app.Activity;
 import android.content.Intent;
 
@@ -40,7 +41,7 @@ public class ResultsActivity extends Activity {
     
     private class ResultsActivityWorker extends AsyncTask<String, Integer, Boolean> {
     	
-    	
+    	String error;
     	
 		@Override
 		protected Boolean doInBackground(String... params) {
@@ -51,7 +52,7 @@ public class ResultsActivity extends Activity {
 				
 				return true;
 			} catch (Exception e) {
-				Log.d("AGH",e.toString());
+				error = e.toString();
 				return false;
 			}
 		}
@@ -93,6 +94,10 @@ public class ResultsActivity extends Activity {
         			parent.addView(child);
         			
         		}		
+        	} else {
+        		CharSequence msg = "There was a problem: "+error;
+        		Toast.makeText(ResultsActivity.this.getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
+        		ResultsActivity.this.finishActivity(0);
         	}
         }
 		
