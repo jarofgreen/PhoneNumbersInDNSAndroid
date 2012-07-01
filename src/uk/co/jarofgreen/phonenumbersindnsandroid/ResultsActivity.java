@@ -1,7 +1,10 @@
 
 package uk.co.jarofgreen.phonenumbersindnsandroid;
 
+import java.util.List;
+
 import uk.co.jarofgreen.phonenumbersindnsandroid.lib.Query;
+import uk.co.jarofgreen.phonenumbersindnsandroid.lib.Result;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,13 +32,15 @@ public class ResultsActivity extends Activity {
     
     
     private class ResultsActivityWorker extends AsyncTask<String, Integer, Boolean> {
-
+    	
+    	List<Result> results;
+    	
 		@Override
 		protected Boolean doInBackground(String... params) {
 
 			try {
 				Query query = new Query(params[0]);
-				query.execute();
+				results = query.execute();
 				
 				return true;
 			} catch (Exception e) {
@@ -45,8 +50,15 @@ public class ResultsActivity extends Activity {
 		}
 		
 		
-        protected void onPostExecute(Boolean result) {   	
-        
+        protected void onPostExecute(Boolean taskResult) {   	
+        	if (taskResult) {
+        		for (Result result: results) {
+        			Log.d("PARSEDDATA",result.getCountryCode());
+        			Log.d("PARSEDDATA",result.getNumber());
+        			Log.d("PARSEDDATA",result.getDescription());
+        			
+        		}		
+        	}
         }
 		
 		

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.xbill.DNS.Lookup;
-import org.xbill.DNS.MXRecord;
 import org.xbill.DNS.Record;
 import org.xbill.DNS.SimpleResolver;
+import org.xbill.DNS.TXTRecord;
 import org.xbill.DNS.Type;
 
 import android.util.Log;
@@ -24,12 +24,19 @@ public class Query {
 	public List<Result> execute() throws Exception {
 		List<Result> out = (ArrayList<Result>)new ArrayList<Result>();
 		
-		Lookup lookup = new Lookup("gmail.com", Type.MX);
+		Lookup lookup = new Lookup("jarofgreen.co.uk", Type.TXT);
 		lookup.setResolver(new SimpleResolver("8.8.8.8"));
 		Record[] records = lookup.run();
 		for (int i = 0; i < records.length; i++) {
-			MXRecord mx =  (MXRecord)records[i];
-			Log.d("DATA","Host " + mx.getTarget());
+			TXTRecord t =  (TXTRecord)records[i];
+			List<String> data = t.getStrings();
+			try {
+				Result r = Result.parse(data.get(0));
+				Log.d("DATA","We got: " + data.get(0));
+				out.add(r);
+			} catch (ResultParseException e) {
+			}
+			
 		}
 
 		
