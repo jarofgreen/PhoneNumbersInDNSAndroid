@@ -10,6 +10,8 @@ public class Result {
 		
 		if (text.substring(0, 8).compareTo("v=phone1") == 0) {
 		
+			text = text.substring(8);
+			
 			StringTokenizer st = new StringTokenizer(text, " ");
 			
 			if (st.countTokens() >= 2) {
@@ -22,7 +24,7 @@ public class Result {
 				number = st.nextToken();
 				description = st.nextToken();
 				while(st.hasMoreTokens()) { 
-					description = description + " "+ st.nextToken();
+					description = description + " " + st.nextToken();
 				}
 				
 				// TODO check countryCode and number are valid, return null if not.
