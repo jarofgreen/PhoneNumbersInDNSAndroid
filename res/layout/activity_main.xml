@@ -16,7 +16,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="textUri"
-        android:ems="10" >
+        android:ems="10" 
+        android:text="jarofgreen.co.uk">
 
         <requestFocus />
     </EditText>

@@ -24,7 +24,7 @@ public class Query {
 	public List<Result> execute() throws Exception {
 		List<Result> out = (ArrayList<Result>)new ArrayList<Result>();
 		
-		Lookup lookup = new Lookup("jarofgreen.co.uk", Type.TXT);
+		Lookup lookup = new Lookup(url, Type.TXT);
 		lookup.setResolver(new SimpleResolver("8.8.8.8"));
 		Record[] records = lookup.run();
 		for (int i = 0; i < records.length; i++) {
