@@ -1,15 +1,29 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:padding="@dimen/padding_medium"
-        android:text="@string/hello_world"
+        android:text="@string/instruction_type_url"
         tools:context=".MainActivity" />
 
-</RelativeLayout>
+    <EditText
+        android:id="@+id/url"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textUri"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/go_button" />
+
+</LinearLayout>
